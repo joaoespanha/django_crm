@@ -2,10 +2,12 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import SingUpForm
+from .models import Record
 
 
 # Create your views here.
 def home(request):
+    records = Record.objects.all()
     # check if user is logged in
     if request.method == "POST":
         username = request.POST["username"]
@@ -19,7 +21,7 @@ def home(request):
             messages.success(request, "There was an error to login")
             return redirect("home")
 
-    return render(request, "home.html", {})
+    return render(request, "home.html", {"records": records})
 
 
 def login_user(request):
@@ -52,3 +54,9 @@ def register_user(request):
         form = SingUpForm()
         return render(request, "register.html", {"form": form})
     return render(request, "register.html", {"form": form})
+
+
+def record(request, pk):
+    if request.user.is_authenticated:
+        record = Record.objects.get(id=pk)
+    return render(request, "record.html", {"custumer_record": record})
