@@ -29,7 +29,8 @@
 
         <tr>
 
-            <td><a href="{% url 'record' record.id %}">{{record.username}}</a></td>
+            <td><a class="link-info link-offset-2 link-underline link-underline-opacity-0"
+                    href="{% url 'record' record.id %}">{{record.username}}</a></td>
             <td>{{record.first_name}}</td>
             <td>{{record.last_name}}</td>
             <td>{{record.email}}</td>
