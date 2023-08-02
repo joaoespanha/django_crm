@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import SingUpForm
+from .forms import SingUpForm, AddRecordForm
 from .models import Record
 
 
@@ -59,4 +59,33 @@ def register_user(request):
 def record(request, pk):
     if request.user.is_authenticated:
         record = Record.objects.get(id=pk)
-    return render(request, "record.html", {"custumer_record": record})
+    return render(request, "record.html", {"customer_record": record})
+
+
+def delete_record(request, pk):
+    if request.user.is_authenticated:
+        record_to_delete = Record.objects.get(id=pk)
+        record_to_delete.delete()
+        messages.success(request, "You have successfully deleted a record")
+        return redirect("home")
+    else:
+        messages.success(request, "You must be logged in to delete a record")
+        return redirect("home")
+
+
+def add_record(request):
+    form = AddRecordForm(request.POST or None)
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            if form.is_valid():
+                form.save()
+                messages.success(request, "You have successfully added a record")
+                return redirect("home")
+        return render(request, "add_record.html", {"form": form})
+    else:
+        messages.success(request, "You must be logged in to add a record")
+        return redirect("home")
+
+
+def update_record(request, pk):
+    ...

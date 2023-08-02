@@ -2,16 +2,21 @@
 
 
 {% block content %}
-<h1>OLAAAAA</h1>
+<h1>{{customer_record.first_name}} {{customer_record.last_name}}</h1>
 
-{{custumer_record.username}}</br>
-{{custumer_record.first_name}}</br>
-{{custumer_record.last_name}}</br>
-{{custumer_record.email}}</br>
-{{custumer_record.phone}}</br>
-{{custumer_record.state}}</br>
-{{custumer_record.city}}</br>
-{{custumer_record.adress}}</br>
-{{custumer_record.zipcode}}</br>
-{{custumer_record.id}}</br>
+{{customer_record.username}}</br>
+{{customer_record.email}}</br>
+{{customer_record.phone}}</br>
+{{customer_record.state}}</br>
+{{customer_record.city}}</br>
+{{customer_record.adress}}</br>
+{{customer_record.zipcode}}</br>
+{{customer_record.id}}</br>
+
+
+
+<a type="button" class="btn btn-danger" href="{% url 'delete_record' customer_record.id %}">Delete</a>
+<a type="button" class="btn btn-danger" href="{% url 'update_record' customer_record.id %}">Update</a>
+
+
 {% endblock %}

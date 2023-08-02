@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from .models import Record
 
 
 class SingUpForm(UserCreationForm):
@@ -50,3 +51,82 @@ class SingUpForm(UserCreationForm):
         self.fields["password2"].widget.attrs["class"] = "form-control"
         self.fields["password2"].widget.attrs["placeholder"] = "Confirm password"
         self.fields["password2"].label = ""
+
+
+class AddRecordForm(forms.ModelForm):
+    first_name = forms.CharField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "First Name"}
+        ),
+    )
+
+    last_name = forms.CharField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Last Name"}
+        ),
+    )
+
+    email = forms.CharField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "example@mail.com"}
+        ),
+    )
+
+    phone = forms.CharField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Phone "}
+        ),
+    )
+
+    adress = forms.CharField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Adress"}
+        ),
+    )
+
+    state = forms.CharField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "State "}
+        ),
+    )
+
+    city = forms.CharField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "City  "}
+        ),
+    )
+
+    zipcode = forms.CharField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Zipcode  "}
+        ),
+    )
+
+    username = forms.CharField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={"class": "form-control", "placeholder": "Username  "}
+        ),
+    )
+
+    class Meta:
+        model = Record
+        fields = (
+            "first_name",
+            "last_name",
+            "email",
+            "username",
+            "phone",
+            "city",
+            "state",
+            "adress",
+            "zipcode",
+        )
